@@ -1,0 +1,31 @@
+import React, {Component} from 'react';
+import {Alert, StyleSheet, Text, View} from 'react-native';
+import {getAuth, SignOut} from 'firebase/auth';
+
+export default class Logout extends Component {
+    componentDidMount() {
+        const auth = getAuth();
+        SignOut(auth)
+        .then(() =>{
+            this.props.navigation.replace('Login');
+        })
+        .catch((error) =>{
+            Alert.alert(error.message);
+        });
+    }
+    render() {
+        return (
+            <View style = {StyleSheet.container}>
+                <Text>Logout</Text>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+});
